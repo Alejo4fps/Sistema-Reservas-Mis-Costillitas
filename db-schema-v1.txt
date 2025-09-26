@@ -1,0 +1,24 @@
+CREATE TABLE clientes (
+    cliente_id SERIAL PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    apellido VARCHAR(100) NOT NULL,
+    telefono VARCHAR(20) UNIQUE,
+    email VARCHAR(100) UNIQUE NOT NULL
+);
+
+CREATE TABLE mesas (
+    mesa_id SERIAL PRIMARY KEY,
+    sede VARCHAR(50) NOT NULL, 
+    capacidad INT NOT NULL,
+    estado VARCHAR(20) DEFAULT 'disponible' 
+);
+
+CREATE TABLE reservas (
+    reserva_id SERIAL PRIMARY KEY,
+    cliente_id INT REFERENCES clientes(cliente_id),
+    mesa_id INT REFERENCES mesas(mesa_id),
+    fecha DATE NOT NULL,
+    hora TIME NOT NULL,
+    num_comensales INT NOT NULL,
+    estado_reserva VARCHAR(20) DEFAULT 'pendiente' 
+);
